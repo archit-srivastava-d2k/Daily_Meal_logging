@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+/* Daily Meal Logger - Wellness-inspired Design System */
+
+@layer base {
+  :root {
+    /* Sage Green Palette */
+    --sage-50: 138 40% 97%;
+    --sage-100: 138 35% 92%;
+    --sage-200: 140 30% 82%;
+    --sage-300: 142 28% 68%;
+    --sage-400: 144 25% 52%;
+    --sage-500: 146 30% 40%;
+    --sage-600: 148 35% 32%;
+    
+    /* Soft Blue Accents */
+    --sky-50: 204 100% 97%;
+    --sky-100: 204 94% 92%;
+    --sky-200: 200 90% 84%;
+    --sky-400: 198 85% 60%;
+    
+    /* Warm Neutrals */
+    --warm-50: 40 33% 98%;
+    --warm-100: 40 30% 96%;
+    --warm-200: 38 25% 90%;
+    --warm-300: 36 20% 80%;
+    --warm-400: 34 15% 60%;
+    --warm-500: 32 12% 45%;
+    --warm-600: 30 10% 30%;
+    --warm-700: 28 8% 20%;
+    --warm-800: 26 6% 12%;
+    
+    /* Status Colors */
+    --success: 152 60% 45%;
+    --success-light: 152 55% 92%;
+    --warning: 38 92% 50%;
+    --warning-light: 40 100% 94%;
+    
+    /* Main Theme */
+    --background: 40 33% 98%;
+    --foreground: 28 8% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 28 8% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 28 8% 20%;
+
+    --primary: 146 30% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 138 35% 92%;
+    --secondary-foreground: 148 35% 32%;
+
+    --muted: 40 30% 96%;
+    --muted-foreground: 32 12% 45%;
+
+    --accent: 198 85% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 38 25% 88%;
+    --input: 38 25% 90%;
+    --ring: 146 30% 40%;
+
+    --radius: 1rem;
+
+    /* Custom shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(var(--warm-400) / 0.12), 0 4px 16px -4px hsl(var(--warm-400) / 0.08);
+    --shadow-card: 0 4px 12px -4px hsl(var(--sage-500) / 0.08), 0 8px 24px -8px hsl(var(--warm-400) / 0.06);
+    --shadow-elevated: 0 8px 24px -8px hsl(var(--sage-500) / 0.12), 0 16px 48px -16px hsl(var(--warm-400) / 0.1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 26 6% 12%;
+    --foreground: 40 30% 96%;
+
+    --card: 28 8% 16%;
+    --card-foreground: 40 30% 96%;
+
+    --popover: 28 8% 16%;
+    --popover-foreground: 40 30% 96%;
+
+    --primary: 144 25% 52%;
+    --primary-foreground: 26 6% 12%;
+
+    --secondary: 148 20% 20%;
+    --secondary-foreground: 138 35% 92%;
+
+    --muted: 30 10% 22%;
+    --muted-foreground: 36 20% 70%;
+
+    --accent: 198 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 25%;
+    --input: 30 10% 25%;
+    --ring: 144 25% 52%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+}
+
+@layer components {
+  .card-wellness {
+    @apply bg-card rounded-2xl shadow-[var(--shadow-card)] border border-border/50;
+  }
+
+  .chip {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer select-none;
+  }
+
+  .chip-default {
+    @apply bg-muted text-muted-foreground hover:bg-secondary hover:text-secondary-foreground;
+  }
+
+  .chip-active {
+    @apply bg-primary text-primary-foreground shadow-sm;
+  }
+
+  .portion-btn {
+    @apply flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-200 cursor-pointer;
+    @apply bg-muted/50 hover:bg-secondary text-muted-foreground hover:text-secondary-foreground;
+  }
+
+  .portion-btn-active {
+    @apply bg-primary text-primary-foreground shadow-md;
+  }
+
+  .feeling-btn {
+    @apply flex flex-col items-center gap-2 p-4 rounded-2xl transition-all duration-200 cursor-pointer;
+    @apply bg-muted/50 hover:bg-secondary border-2 border-transparent;
+  }
+
+  .feeling-btn-active {
+    @apply bg-secondary border-primary shadow-md;
+  }
+
+  .meal-textarea {
+    @apply w-full min-h-[100px] p-4 rounded-xl bg-muted/50 border border-border/50 resize-none;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50;
+    @apply placeholder:text-muted-foreground/60 transition-all duration-200;
+  }
+}
