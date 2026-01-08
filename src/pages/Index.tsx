@@ -4,6 +4,13 @@ import { MealCard, MealData } from "@/components/MealCard";
 import { Leaf, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  getTodayDate,
+  getYesterdayDate,
+  getMealLogsFromStorage,
+  saveMealLogsToStorage,
+  initializeDefaultYesterdayMeals,
+} from "@/utils/mealStorage";
 
 const meals = [
   { id: "breakfast", name: "Breakfast", icon: "🌅" },
@@ -11,90 +18,6 @@ const meals = [
   { id: "dinner", name: "Dinner", icon: "🌙" },
   { id: "snacks", name: "Snacks", icon: "🍎" },
 ];
-
-// Helper functions for local storage
-const STORAGE_KEY = "mealLogs";
-
-const getTodayDate = () => new Date().toISOString().split("T")[0]; // give today's date
-
-const getYesterdayDate = () => {
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  return yesterday.toISOString().split("T")[0];
-}; // give yesterday's date
-
-const getMealLogsFromStorage = () => {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : {};
-  } catch (error) {
-    console.error("Error reading from localStorage:", error);
-    return {};
-  }
-};
-
-const saveMealLogsToStorage = (
-  date: string,
-  meals: Record<string, MealData>
-) => {
-  try {
-    const allLogs = getMealLogsFromStorage();
-    allLogs[date] = meals;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(allLogs));
-  } catch (error) {
-    console.error("Error saving to localStorage:", error);
-  }
-}; // it updates today's meal data only , if its new ,then simply add it
-
-// Initialize default meals for yesterday (first-time users)
-const initializeDefaultYesterdayMeals = () => {
-  const allLogs = getMealLogsFromStorage();
-  const yesterdayDate = getYesterdayDate();
-
-  // Only add default meals if yesterday's data doesn't exist
-  if (!allLogs[yesterdayDate]) {
-    const defaultYesterdayMeals: Record<string, MealData> = {
-      breakfast: {
-        items: ["Oatmeal with banana", "Coffee"],
-        portions: { "Oatmeal with banana": "medium", Coffee: "small" },
-        skipped: false,
-        feeling: "good",
-        symptoms: ["none"],
-        note: "",
-      },
-      lunch: {
-        items: ["2 ragi rotis", "Moong dal", "Cucumber salad"],
-        portions: {
-          "2 ragi rotis": "medium",
-          "Moong dal": "medium",
-          "Cucumber salad": "small",
-        },
-        skipped: false,
-        feeling: "great",
-        symptoms: ["none"],
-        note: "",
-      },
-      dinner: {
-        items: ["Brown rice", "Sambar", "Yogurt"],
-        portions: { "Brown rice": "medium", Sambar: "medium", Yogurt: "small" },
-        skipped: false,
-        feeling: "good",
-        symptoms: ["none"],
-        note: "",
-      },
-      snacks: {
-        items: ["Mixed nuts", "Green tea"],
-        portions: { "Mixed nuts": "small", "Green tea": "small" },
-        skipped: false,
-        feeling: "great",
-        symptoms: ["none"],
-        note: "",
-      },
-    };
-
-    saveMealLogsToStorage(yesterdayDate, defaultYesterdayMeals);
-  }
-};
 
 const initialMealData: MealData = {
   items: [],
